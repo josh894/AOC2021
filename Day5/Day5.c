@@ -21,68 +21,68 @@ int main (int argc, char *argv[]){
 
 	for(int i = 0; i < 1000; i++){
 		for(int j = 0; j < 1000; j++){
-			grid[i][j] = 0;
+			grid[i][j] = 0; //create 1000x1000 grid
 		}
 	}
 
-	while(fscanf(fp, "%s %s %s", begin, bye, end) != EOF){
-		char * token = strtok(begin, ",");
-		char * token2 = strtok(NULL, ",");
+	while(fscanf(fp, "%s %s %s", begin, bye, end) != EOF){ //process input
+		char * token = strtok(begin, ","); //x1
+		char * token2 = strtok(NULL, ","); //y1
 		
 		x1 = atoi(token);
 		y1 = atoi(token2);
 		printf("%d %d\n", x1, y1);
 
-		char * token3 = strtok(end, ",");
-		char * token4 = strtok(NULL, ",");
+		char * token3 = strtok(end, ","); //x2
+		char * token4 = strtok(NULL, ","); //y2
 		x2 = atoi(token3);
 		y2 = atoi(token4);
 
-		if(x1 == x2){
+		if(x1 == x2){ //vertical line
 			if(y1 > y2){
-				for(int i = y2; i <= y1; i++){
+				for(int i = y2; i <= y1; i++){ //travel across it towards y1
+					grid[x1][i]++; //increment one line going over point for each
+				}
+			}
+			if(y1 < y2){ 
+				for(int i = y1; i <= y2; i++){ //travel across it towards y2
 					grid[x1][i]++;
 				}
 			}
-			if(y1 < y2){
-				for(int i = y1; i <= y2; i++){
-					grid[x1][i]++;
-				}
-			}
-		}else if(y1 == y2){
+		}else if(y1 == y2){ //vertical line
 			if(x1 > x2){
-				for(int i = x2; i <= x1; i++){
+				for(int i = x2; i <= x1; i++){ //travel across to x1
 					grid[i][y1]++;
 				}
 			}
 			if(x1 < x2){
-				for(int i = x1; i <= x2; i++){
+				for(int i = x1; i <= x2; i++){//travel across to x2
 					grid[i][y1]++;
 				}
 			}
 		}else{
-			if(x2 > x1 && y2 > y1){
+			if(x2 > x1 && y2 > y1){ //diagonal line '/' going right to 999,999
 				int p = 0;
-				for(int i = x1; i <= x2; i++){
+				for(int i = x1; i <= x2; i++){ 
 					grid[i][y1+p]++;
 					p++;
 				}
 			}
-			if(x2 < x1 && y2 < y1){
+			if(x2 < x1 && y2 < y1){ //diagonal line '/' going left to 0,0
 				int p = 0;
 				for(int i = x1; i >= x2; i--){
 					grid[i][y1-p]++;
 					p++;
 				}
 			}
-			if(x2 > x1 && y2 < y1){
+			if(x2 > x1 && y2 < y1){  //diagonal line '\' going right to 999,0
 				int p = 0;
 				for(int i = x1; i <= x2; i++){
 					grid[i][y1-p]++;
 					p++;
 				}
 			}
-			if(x2 < x1 && y2 > y1){
+			if(x2 < x1 && y2 > y1){ //diagonal line '\' going left to 0,999
 				int p = 0;
 				for(int i = x1; i >= x2; i--){
 					grid[i][y1+p]++;
@@ -93,7 +93,7 @@ int main (int argc, char *argv[]){
 	}
 	for(int i = 0; i < 1000; i++){
 		for(int j = 0; j < 1000; j++){
-			if(grid[i][j] > 1){
+			if(grid[i][j] > 1){ //if point was crossed more than once
 				total++;
 			}
 		}

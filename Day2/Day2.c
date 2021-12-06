@@ -17,13 +17,13 @@ int main (int argc, char *argv[]){
 
 	while(fscanf(fp, "%s %d", direction, &length) != EOF){
 		printf("%d\n", length);
-		if(strcmp(direction, "forward") == 0){
-			hori = hori + length;
-			vert = vert + (length * aim);
+		if(strcmp(direction, "forward") == 0){ //if sub moves forward
+			hori = hori + length; //increase horizontal length
+			vert = vert + (length * aim); //increase vertical movement by degree of angle
 			printf("%s\n", direction);
 		}
 		if(strcmp(direction, "down") == 0){
-			aim = aim + length;
+			aim = aim + length; //down increases aim since going deeper into water
 		}
 		if(strcmp(direction, "up") == 0){
 			aim = aim - length;
