@@ -1,0 +1,5 @@
+Day3: Day3.o
+	gcc -std=c99 -Wall -pedantic Day3.o -o Day3
+
+Day3.o: Day3.c
+	gcc -std=c99 -Wall -pedantic -c Day3.c -o Day3.o
